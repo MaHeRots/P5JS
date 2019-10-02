@@ -19,9 +19,9 @@ function aSnake(
   }
 
   this.draw = function() {
-    for (var i = 0; i > this.score; i++) {
-      rect(this.length[i].x, this.length[i].y, gridSize, gridSize);
-    }
+    // for (var i = 0; i > this.score; i++) {
+    //   rect(this.length[i].x, this.length[i].y, gridSize, gridSize);
+    // }
     for (var i = 0; i < length; i++) {
       if (i == 0) {
         noStroke();
@@ -64,7 +64,7 @@ function aSnake(
         const index = applesBasket.indexOf(apple);
         applesBasket.splice(index, 1);
         grow();
-        applesBasket.push(new anApple(random(width), random(height));
+        applesBasket.push(new anApple(random(width), random(height)));
         return;
       }
     }
