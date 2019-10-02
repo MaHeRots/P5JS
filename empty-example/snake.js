@@ -56,13 +56,17 @@ function aSnake(
     }
   };
 
-  this.eat = function(applePosition) {
-    var d = dist(this.x, this.y, applePosition.x, applePosition.y);
-    if (d < 1) {
-      this.score++;
-      return true;
-    } else {
-      return false;
+  this.eat = function(applesBasket) {
+    for (const apple of applesBasket) {
+      var d = dist(this.x, this.y, apple.x, apple.y);
+      if (d < 1) {
+        // TODO:  REPLACE WITH JAVASCRIPT METHOD.
+        const index = applesBasket.indexOf(apple);
+        applesBasket.splice(index, 1);
+        grow();
+        applesBasket.push(new anApple(random(width), random(height));
+        return;
+      }
     }
   };
 
