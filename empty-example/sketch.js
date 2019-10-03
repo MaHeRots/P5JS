@@ -9,10 +9,15 @@ function setup() {
 
   //You will need as many apples in the drawing
   for (var i = 0; i < 10; i++) {
-    applesBasket.push(new anApple(random(width), random(height)));
+    applesBasket.push(
+      new anApple(Math.round(random(width)), Math.round(random(height)))
+    );
   }
   //And a snake position
-  snakePosition = createVector(windowHeight / 2, windowWidth / 2);
+  snakePosition = createVector(
+    Math.round(windowHeight / 2),
+    Math.rounwindowWidth / 2
+  );
   snakeDirection = createVector(0, -1);
   snake = new aSnake(snakePosition, snakeDirection, 4);
 }

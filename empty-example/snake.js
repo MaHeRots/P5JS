@@ -10,7 +10,6 @@ function aSnake(
   this.cases = new Array();
   this.direction = direction;
   this.score = 0;
-  this.length = length;
 
   for (var i = 0; i < length; i++) {
     var distance = p5.Vector.mult(direction, gridSize * -i);
@@ -22,7 +21,7 @@ function aSnake(
     // for (var i = 0; i > this.score; i++) {
     //   rect(this.length[i].x, this.length[i].y, gridSize, gridSize);
     // }
-    for (var i = 0; i < length; i++) {
+    for (var i = 0; i < this.cases.length - 1; i++) {
       if (i == 0) {
         noStroke();
         fill(34, 139, 34);
@@ -38,6 +37,14 @@ function aSnake(
   this.move = function() {
     for (var i = this.cases.length - 1; i > 0; i--) {
       this.cases[i] = this.cases[i - 1];
+      for (var j = i - 1; j > 0; j--) {
+        const current = this.cases[i];
+        const tail = this.cases[j];
+        console.log("couille", current, tail);
+        if (tail.x == current.x && tail.y === current.y) {
+          console.log("game over wallah");
+        }
+      }
     }
     var distance = p5.Vector.mult(this.direction, gridSize);
     this.cases[0] = p5.Vector.add(this.cases[0], distance);
@@ -58,12 +65,13 @@ function aSnake(
 
   this.eat = function(applesBasket) {
     for (const apple of applesBasket) {
-      var d = dist(this.x, this.y, apple.x, apple.y);
-      if (d < 1) {
-        // TODO:  REPLACE WITH JAVASCRIPT METHOD.
+      const position = this.cases[this.cases.length - 1];
+      var d = dist(position.x, position.y, apple.position.x, apple.position.y);
+
+      if (d < gridSize) {
         const index = applesBasket.indexOf(apple);
         applesBasket.splice(index, 1);
-        grow();
+        this.grow();
         applesBasket.push(new anApple(random(width), random(height)));
         return;
       }
@@ -71,9 +79,7 @@ function aSnake(
   };
 
   this.grow = function() {
-    for (var i = 0; i > this.score - 1; i++) {
-      this.length[i] = this.length[i + 1];
-    }
-    this.lenght[this.score - 1] = createVector(this.x, this.y);
+    const distance = p5.Vector.mult(direction, gridSize * -i);
+    this.cases.push(p5.Vector.add(this.cases[this.cases.length - 1], distance));
   };
 }
