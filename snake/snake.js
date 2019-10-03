@@ -37,12 +37,13 @@ function aSnake(
   this.move = function() {
     for (var i = this.cases.length - 1; i > 0; i--) {
       this.cases[i] = this.cases[i - 1];
-      for (var j = i - 1; j > 0; j--) {
+      for (var j = i - 2; j > 0; j--) {
         const current = this.cases[i];
         const tail = this.cases[j];
-        console.log("couille", current, tail);
         if (tail.x == current.x && tail.y === current.y) {
-          console.log("game over wallah");
+          alert("Game over");
+          window.resetGame();
+          return;
         }
       }
     }

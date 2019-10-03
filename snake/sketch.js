@@ -16,11 +16,15 @@ function setup() {
   //And a snake position
   snakePosition = createVector(
     Math.round(windowHeight / 2),
-    Math.rounwindowWidth / 2
+    Math.round(windowWidth / 2)
   );
   snakeDirection = createVector(0, -1);
   snake = new aSnake(snakePosition, snakeDirection, 4);
 }
+
+window.resetGame = function resetGame() {
+  setup();
+};
 
 //And a way to put them out
 function drawApple() {
@@ -51,7 +55,6 @@ function draw() {
   }
 }
 
-//ça, j'ai compris mais c'est pas ce qu'on me demande
 function keyPressed() {
   if (keyCode === UP_ARROW && snake.direction.y !== 1) {
     snake.direction = createVector(0, -1);
